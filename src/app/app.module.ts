@@ -9,6 +9,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { GalleryItemComponent } from './gallery/gallery-item/gallery-item.component';
 import { GalleryListComponent } from './gallery/gallery-list/gallery-list.component';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { GalleryListComponent } from './gallery/gallery-list/gallery-list.compon
     PageNotFoundComponent,
     GalleryItemComponent,
     GalleryListComponent,
+    NavComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [],
