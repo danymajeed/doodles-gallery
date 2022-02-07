@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
+import { NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { fader } from './route-animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  animations: [fader],
 })
 export class AppComponent {
   activeRoute = '/';
@@ -19,4 +21,8 @@ export class AppComponent {
   ngOnInit() {}
 
   title = 'doodles';
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet?.activatedRouteData?.['animation'];
+  }
 }

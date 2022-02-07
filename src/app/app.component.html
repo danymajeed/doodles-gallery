@@ -16,6 +16,9 @@
 
 <app-nav [activeRoute]="activeRoute"></app-nav>
 
-<main class="max-w-11xl mx-auto px-4 sm:px-6 lg:px-8">
-  <router-outlet></router-outlet>
+<main
+  [@routeAnimations]="prepareRoute(outlet)"
+  class="max-w-11xl mx-auto px-4 sm:px-6 lg:px-8"
+>
+  <router-outlet #outlet="outlet"></router-outlet>
 </main>
