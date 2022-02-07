@@ -1,3 +1,4 @@
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,11 @@ const routes: Routes = [
     path: 'gallery',
     component: GalleryComponent,
     data: { animation: 'GalleryPage' },
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
+    data: { animation: 'NotFoundPage' },
   },
 ];
 
