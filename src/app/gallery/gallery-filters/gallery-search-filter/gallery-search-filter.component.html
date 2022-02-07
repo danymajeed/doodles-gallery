@@ -1,0 +1,16 @@
+<div>
+  <label
+    for="searchbyid"
+    class="flex w-full py-3 focus:border-red-300 focus-within:border-b-black border-b relative border-opacity-10 items-center border-black"
+    ><i class="mr-4 fas fa-search"></i>
+    <input
+      [(ngModel)]="search"
+      #searchControl="ngModel"
+      (input)="updateSearch(searchControl)"
+      placeholder="Find by serial..."
+      id="searchbyid"
+      type="text"
+      class="h-full text-sm w-full z-10 focus:outline-none active:outline-none border-0 border-none bg-transparent text-black"
+      value=""
+  /></label>
+</div>

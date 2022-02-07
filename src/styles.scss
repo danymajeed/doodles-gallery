@@ -12,6 +12,7 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
 router-outlet ~ * {
   position: absolute;
+  padding: 0 20px;
 }
 
 .text-2xs {

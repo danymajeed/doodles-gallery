@@ -10,6 +10,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { GalleryItemComponent } from './gallery/gallery-item/gallery-item.component';
 import { GalleryListComponent } from './gallery/gallery-list/gallery-list.component';
 import { NavComponent } from './nav/nav.component';
+import { GalleryFiltersComponent } from './gallery/gallery-filters/gallery-filters.component';
+import { GallerySearchFilterComponent } from './gallery/gallery-filters/gallery-search-filter/gallery-search-filter.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,8 +23,15 @@ import { NavComponent } from './nav/nav.component';
     GalleryItemComponent,
     GalleryListComponent,
     NavComponent,
+    GalleryFiltersComponent,
+    GallerySearchFilterComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
