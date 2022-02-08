@@ -7,6 +7,7 @@ export interface Doodle {
 
 export interface Filters {
   search: string;
+  addresses: Array<string>;
 }
 
 @Component({
@@ -16,8 +17,9 @@ export interface Filters {
 })
 export class GalleryComponent implements OnInit {
   doodles: Array<Doodle> = [];
-  filters: Filters = { search: '' };
-  filtersDisabled = false;
+  filters: Filters = { search: '', addresses: [] };
+  loading: boolean = false;
+  myDoodles = false;
 
   constructor() {}
 
@@ -146,11 +148,9 @@ export class GalleryComponent implements OnInit {
     ];
   }
 
-  refreshDoodles(event: Filters) {
-    this.filtersDisabled = true;
-    console.log(event);
-    setTimeout(() => {
-      this.filtersDisabled = false;
-    }, 1000);
+  updateMyDoodles(event: any) {
+    this.myDoodles = event.target.checked;
   }
+
+  refreshDoodles(fitlers: Filters) {}
 }

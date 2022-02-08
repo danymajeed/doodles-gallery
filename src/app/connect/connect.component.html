@@ -1,0 +1,14 @@
+<style>
+  :host {
+    width: 100%;
+  }
+</style>
+
+<div class="col-span-full h-screen flex flex-col items-center justify-center">
+  <button
+    class="shadow-2xl w-full xl:max-w-2xl lg:max-w-lg flex items-center justify-center text-lg uppercase h-20 duration-300 cursor-pointer font-600 transform border py-5 rounded-md border-none text-gray-800 hover:text-black bg-white"
+  >
+    <p class="lg:flex hidden whitespace-nowrap">Connect to Wallet</p>
+    <span (click)="connect()" class="lg:hidden block">Connect</span>
+  </button>
+</div>

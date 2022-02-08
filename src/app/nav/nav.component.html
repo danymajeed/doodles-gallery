@@ -31,6 +31,14 @@
         </li>
         <li>
           <a
+            [ngClass]="activeRoute == '/profile' ? 'underline' : ''"
+            class="bg-opacity-20 bg-white text-black opacity-80 relative h-7 items-center tracking-wider pt-0.5 first::pt-0 uppercase text-2xs font-500 padding-huge duration-200 px-4 hover:bg-opacity-70 rounded flex justify-center flex-row"
+            routerLink="/profile"
+            >Profile</a
+          >
+        </li>
+        <li>
+          <a
             target="_blank"
             href="https://twitter.com/azukizen"
             class="bg-opacity-20 text-black opacity-80 } items-center relative h-7 items-center tracking-wider pt-0.5 first::pt-0 duration-1000 uppercase text-2xs font-500 padding-huge bg-white duration-200 items-center px-4 hover:bg-opacity-70 rounded flex justify-center flex-row"
@@ -69,7 +77,6 @@
           class="text-gray-500 w-10 h-10 relative focus:outline-none"
           (click)="mobileNavOpen = !mobileNavOpen"
         >
-          <span class="sr-only">Open main menu</span>
           <div
             class="block w-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
           >
@@ -102,7 +109,7 @@
 >
   <ul class="text-xl w-full uppercase">
     <li
-      [ngClass]="activeRoute == '/' ? 'bg-red-100 px-5' : ''"
+      [ngClass]="activeRoute == '/' ? 'bg-white bg-opacity-30 px-5' : ''"
       class="border-b border-black border-opacity-10"
     >
       <a
@@ -113,7 +120,9 @@
       </a>
     </li>
     <li
-      [ngClass]="activeRoute == '/gallery' ? 'bg-red-100 px-5' : ''"
+      [ngClass]="
+        activeRoute == '/gallery' ? 'bg-white  bg-opacity-30 px-5' : ''
+      "
       class="border-b border-black border-opacity-10"
     >
       <a
@@ -121,6 +130,19 @@
         class="py-3 w-full items-center relative flex text-black"
         routerLink="/gallery"
         >Gallery
+      </a>
+    </li>
+    <li
+      [ngClass]="
+        activeRoute == '/profile' ? 'bg-white  bg-opacity-30 px-5' : ''
+      "
+      class="border-b border-black border-opacity-10"
+    >
+      <a
+        (click)="mobileNavOpen = false"
+        class="py-3 w-full items-center relative flex text-black"
+        routerLink="/profile"
+        >Profile
       </a>
     </li>
     <li class="border-b border-black border-opacity-10">

@@ -1,3 +1,5 @@
+import { ConnectComponent } from './connect/connect.component';
+import { ProfileComponent } from './profile/profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +16,11 @@ const routes: Routes = [
     path: 'gallery',
     component: GalleryComponent,
     data: { animation: 'GalleryPage' },
+  },
+  {
+    path: 'connect',
+    component: ConnectComponent,
+    data: { animation: 'ConnectPage' },
   },
   {
     path: '**',

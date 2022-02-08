@@ -13,6 +13,9 @@ import { NavComponent } from './nav/nav.component';
 import { GalleryFiltersComponent } from './gallery/gallery-filters/gallery-filters.component';
 import { GallerySearchFilterComponent } from './gallery/gallery-filters/gallery-search-filter/gallery-search-filter.component';
 import { FormsModule } from '@angular/forms';
+import { ConnectComponent } from './connect/connect.component';
+import { ProfileComponent } from './profile/profile.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,12 +28,15 @@ import { FormsModule } from '@angular/forms';
     NavComponent,
     GalleryFiltersComponent,
     GallerySearchFilterComponent,
+    ConnectComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
