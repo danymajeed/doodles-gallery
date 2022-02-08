@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth.guard';
 import { ConnectComponent } from './connect/connect.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -20,7 +21,14 @@ const routes: Routes = [
   {
     path: 'connect',
     component: ConnectComponent,
+    canActivate: [AuthGuard],
     data: { animation: 'ConnectPage' },
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
+    data: { animation: 'ProfilePage' },
   },
   {
     path: '**',

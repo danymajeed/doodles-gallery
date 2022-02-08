@@ -5,14 +5,7 @@ import MetaMaskOnboarding from '@metamask/onboarding';
   providedIn: 'root',
 })
 export class MetaMaskService {
-  constructor() {
-    const { ethereum } = window as any;
-    if (ethereum) {
-      ethereum.on('accountsChanged', (accounts: Array<any>) => {
-        console.log(accounts);
-      });
-    }
-  }
+  constructor() {}
 
   isMetaMaskInstalled = () => {
     return MetaMaskOnboarding.isMetaMaskInstalled();
