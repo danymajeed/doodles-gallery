@@ -1,19 +1,20 @@
-import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { LocalStorageService } from './local-storage.service';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthStateService {
-  private userState = new BehaviorSubject<boolean>(
-    this.localStorageService.isLoggedIn()
+export class UserStateService {
+  private userState = new BehaviorSubject<any>(
+    this.localStorageService.getUser()
   );
-  userAuthState = this.userState.asObservable();
+
+  user = this.userState.asObservable();
 
   constructor(public localStorageService: LocalStorageService) {}
 
-  setAuthState(value: boolean) {
+  setUserState(value: any) {
     this.userState.next(value);
   }
 }

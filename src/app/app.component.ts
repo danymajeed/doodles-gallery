@@ -1,5 +1,6 @@
+import { UserStateService } from './user-state.service';
+import { LocalStorageService } from './local-storage.service';
 import { AuthStateService } from './auth-state.service';
-import { TokenService } from './token.service';
 import { ApiService } from './api.service';
 import { Component, NgZone } from '@angular/core';
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
@@ -15,10 +16,11 @@ export class AppComponent {
   activeRoute = '/';
   constructor(
     private router: Router,
-    private tokenService: TokenService,
     private authStateService: AuthStateService,
+    private userStateService: UserStateService,
     private apiService: ApiService,
-    private zone: NgZone
+    private zone: NgZone,
+    private localStorageService: LocalStorageService
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -34,19 +36,25 @@ export class AppComponent {
         if (accounts.length) {
           this.apiService.login({ public_address: accounts[0] }).subscribe(
             (result) => {
-              this.tokenService.handleData(result.access_token);
+              this.localStorageService.handleData(
+                result.access_token,
+                result.user
+              );
+              this.authStateService.setAuthState(true);
+              this.userStateService.setUserState(result.user);
             },
             (error) => {},
             () => {
-              this.authStateService.setAuthState(true);
               this.zone.run(() => {
                 this.router.navigateByUrl('/profile');
               });
             }
           );
         } else {
-          this.tokenService.removeToken();
+          this.localStorageService.clear();
           this.authStateService.setAuthState(false);
+          this.userStateService.setUserState(null);
+
           if (this.router.url == '/profile') {
             this.zone.run(() => {
               this.router.navigateByUrl('/gallery');

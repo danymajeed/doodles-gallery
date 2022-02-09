@@ -21,21 +21,28 @@
       </h1>
 
       <div class="flex items-center pb-0">
-        <label class="flex justify-between items-center cursor-pointer">
-          <div class="uppercase font-bold mr-3 duration-150 ease-in">
-            {{ !myDoodles ? "All doodles" : "My Doodles" }}
-          </div>
-          <input
-            [checked]="myDoodles"
-            [disabled]="loading"
-            (change)="updateMyDoodles($event)"
-            type="checkbox"
-            class="sr-only appearance-none peer"
-          />
+        <a
+          *ngIf="user == null"
+          routerLink="/connect"
+          type="button"
+          class="flex hover:opacity-60 duration-300 lg:py-2 lg:px-4 lg:rounded lg:bg-gray-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+            class="w-5 h-5"
+          >
+            <path
+              d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"
+            ></path>
+          </svg>
           <span
-            class="w-12 h-4 flex items-center shadow-inner flex-shrink-0 bg-gray-200 rounded-full duration-150 ease-in-out peer-checked:bg-red-300 after:w-6 after:h-6 after:bg-white after:rounded-full after:shadow after:duration-150 peer-checked:after:translate-x-6"
-          ></span>
-        </label>
+            class="block uppercase tracking-wide text-xs font-mono pt-0.5 pl-2"
+            >Connect To MetaMask</span
+          >
+        </a>
       </div>
     </div>
 

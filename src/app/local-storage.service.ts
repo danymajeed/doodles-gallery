@@ -4,19 +4,25 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root',
 })
-export class TokenService {
+export class LocalStorageService {
   private issuer = {
     login: 'http://127.0.0.1:8000/api/auth/login',
   };
 
   constructor() {}
 
-  handleData(token: string) {
+  handleData(token: string, user: any) {
     localStorage.setItem('auth_token', token);
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   getToken() {
     return localStorage.getItem('auth_token');
+  }
+
+  getUser() {
+    var user = localStorage.getItem('user');
+    return user && JSON.parse(user);
   }
 
   // Verify the token
@@ -47,8 +53,8 @@ export class TokenService {
     return this.isValidToken();
   }
 
-  // Remove token
-  removeToken() {
+  clear() {
     localStorage.removeItem('auth_token');
+    localStorage.removeItem('user');
   }
 }

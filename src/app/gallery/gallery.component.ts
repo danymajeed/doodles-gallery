@@ -1,3 +1,4 @@
+import { UserStateService } from '../user-state.service';
 import { Component, OnInit } from '@angular/core';
 
 export interface Doodle {
@@ -19,11 +20,16 @@ export class GalleryComponent implements OnInit {
   doodles: Array<Doodle> = [];
   filters: Filters = { search: '', addresses: [] };
   loading: boolean = false;
-  myDoodles = false;
+  user: any = null;
 
-  constructor() {}
+  constructor(private userStateService: UserStateService) {}
 
   ngOnInit(): void {
+    this.userStateService.user.subscribe((user) => {
+      this.user = user;
+      console.log(this.user);
+    });
+
     this.doodles = [
       {
         id: 5693,
@@ -146,10 +152,6 @@ export class GalleryComponent implements OnInit {
           'https://azk.imgix.net/images/f1f47cb9-0a95-4d60-9339-dd1d2b11efa6.png?fm=jpg&amp;w=800',
       },
     ];
-  }
-
-  updateMyDoodles(event: any) {
-    this.myDoodles = event.target.checked;
   }
 
   refreshDoodles(fitlers: Filters) {}

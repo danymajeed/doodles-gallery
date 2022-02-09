@@ -1,4 +1,4 @@
-import { TokenService } from './token.service';
+import { LocalStorageService } from './local-storage.service';
 import { Injectable } from '@angular/core';
 import {
   Router,
@@ -16,7 +16,10 @@ export class AuthGuard implements CanActivate {
   private connect: UrlTree;
   private profile: UrlTree;
 
-  constructor(private router: Router, private token: TokenService) {
+  constructor(
+    private router: Router,
+    private localStorageService: LocalStorageService
+  ) {
     this.connect = this.router.parseUrl('connect');
     this.profile = this.router.parseUrl('profile');
   }
@@ -29,7 +32,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.token.isLoggedIn()) {
+    if (this.localStorageService.isLoggedIn()) {
       if (state.url === '/connect') {
         return this.profile;
       } else {

@@ -31,7 +31,11 @@
         </li>
         <li>
           <a
-            [ngClass]="activeRoute == '/profile' ? 'underline' : ''"
+            [ngClass]="
+              activeRoute == '/profile' || activeRoute == '/connect'
+                ? 'underline'
+                : ''
+            "
             class="bg-opacity-20 bg-white text-black opacity-80 relative h-7 items-center tracking-wider pt-0.5 first::pt-0 uppercase text-2xs font-500 padding-huge duration-200 px-4 hover:bg-opacity-70 rounded flex justify-center flex-row"
             routerLink="/profile"
             >Profile</a
@@ -134,7 +138,9 @@
     </li>
     <li
       [ngClass]="
-        activeRoute == '/profile' ? 'bg-white  bg-opacity-30 px-5' : ''
+        activeRoute == '/profile' || activeRoute == '/connect'
+          ? 'bg-white  bg-opacity-30 px-5'
+          : ''
       "
       class="border-b border-black border-opacity-10"
     >
