@@ -4,4 +4,40 @@
   }
 </style>
 
-<p class="pt-32">Profile Works</p>
+<form
+  [formGroup]="profileForm"
+  (ngSubmit)="submit(profileForm)"
+  class="flex items-center justify-center flex-col h-screen md:mx-32"
+>
+  <div class="relative z-0 my-6 w-full group">
+    <input
+      type="text"
+      name="twitter"
+      [ngClass]="
+        !twitterControl.value && twitterControl.touched
+          ? 'border-red-500'
+          : 'border-gray-500 '
+      "
+      class="block p-2.5 w-full text-xl text-gray-900 bg-transparent rounded-md border-2 appearance-none focus:outline-none focus:ring-0 focus:border-[#1da1f2] peer"
+      placeholder=" "
+      formControlName="twitter"
+    />
+    <label
+      [ngClass]="twitterControl.value ? 'z-10' : ''"
+      for="twitter"
+      class="uppercase bg-white tracking-widest absolute mx-2.5 text-xl text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 peer-focus:px-2.5 peer-focus:mx-1 -z-10 origin-[0] peer-focus:z-10 peer-focus:left-0 peer-focus:text-[#1da1f2] peer-focus:dark:text-[#1da1f2] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+      >Twitter Username</label
+    >
+  </div>
+
+  <div class="text-center">
+    <button
+      [ngClass]="profileForm.invalid ? 'opacity-50' : ''"
+      type="submit"
+      [disabled]="profileForm.invalid"
+      class="py-2.5 px-5 text-white rounded-md uppercase bg-[#1da1f2]"
+    >
+      Save
+    </button>
+  </div>
+</form>

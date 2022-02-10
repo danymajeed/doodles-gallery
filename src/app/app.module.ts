@@ -12,7 +12,7 @@ import { GalleryListComponent } from './gallery/gallery-list/gallery-list.compon
 import { NavComponent } from './nav/nav.component';
 import { GalleryFiltersComponent } from './gallery/gallery-filters/gallery-filters.component';
 import { GallerySearchFilterComponent } from './gallery/gallery-filters/gallery-search-filter/gallery-search-filter.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConnectComponent } from './connect/connect.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -39,6 +39,7 @@ import { GalleryTypeFilterComponent } from './gallery/gallery-filters/gallery-ty
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
