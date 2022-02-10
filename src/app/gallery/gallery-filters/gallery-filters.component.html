@@ -11,5 +11,10 @@
       [search]="filters.search"
       (searchUpdateEvent)="updateSearch($event)"
     ></app-gallery-search-filter>
+    <app-gallery-type-filter
+      [user]="user"
+      [type]="filters.type"
+      (typeUpdateEvent)="updateType($event)"
+    ></app-gallery-type-filter>
   </div>
 </div>

@@ -8,7 +8,7 @@ export interface Doodle {
 
 export interface Filters {
   search: string;
-  addresses: Array<string>;
+  type: string;
 }
 
 @Component({
@@ -18,7 +18,7 @@ export interface Filters {
 })
 export class GalleryComponent implements OnInit {
   doodles: Array<Doodle> = [];
-  filters: Filters = { search: '', addresses: [] };
+  filters: Filters = { search: '', type: 'all' };
   loading: boolean = false;
   user: any = null;
 
@@ -27,7 +27,6 @@ export class GalleryComponent implements OnInit {
   ngOnInit(): void {
     this.userStateService.user.subscribe((user) => {
       this.user = user;
-      console.log(this.user);
     });
 
     this.doodles = [

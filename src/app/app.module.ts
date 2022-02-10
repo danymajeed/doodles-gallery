@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { ConnectComponent } from './connect/connect.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GalleryTypeFilterComponent } from './gallery/gallery-filters/gallery-type-filter/gallery-type-filter.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     GallerySearchFilterComponent,
     ConnectComponent,
     ProfileComponent,
+    GalleryTypeFilterComponent,
   ],
   imports: [
     BrowserModule,

@@ -32,36 +32,43 @@ export class AppComponent {
   ngOnInit() {
     const { ethereum } = window as any;
     if (ethereum) {
-      ethereum.on('accountsChanged', (accounts: Array<string>) => {
-        if (accounts.length) {
-          this.apiService.login({ public_address: accounts[0] }).subscribe(
-            (result) => {
-              this.localStorageService.handleData(
-                result.access_token,
-                result.user
-              );
-              this.authStateService.setAuthState(true);
-              this.userStateService.setUserState(result.user);
-            },
-            (error) => {},
-            () => {
-              this.zone.run(() => {
-                this.router.navigateByUrl('/profile');
-              });
-            }
-          );
-        } else {
-          this.localStorageService.clear();
-          this.authStateService.setAuthState(false);
-          this.userStateService.setUserState(null);
-
-          if (this.router.url == '/profile') {
-            this.zone.run(() => {
-              this.router.navigateByUrl('/gallery');
-            });
-          }
-        }
+      ethereum.request({ method: 'eth_accounts' }).then((accounts: any) => {
+        this.zone.run(() => {
+          if (!accounts.length) this.logout();
+        });
       });
+
+      ethereum.on('accountsChanged', (accounts: Array<string>) => {
+        this.zone.run(() => {
+          if (accounts.length) {
+            this.login(accounts);
+          } else this.logout();
+        });
+      });
+    }
+  }
+
+  login(accounts: Array<string>) {
+    this.apiService.login({ public_address: accounts[0] }).subscribe(
+      (result) => {
+        this.localStorageService.handleData(result.access_token, result.user);
+        this.authStateService.setAuthState(true);
+        this.userStateService.setUserState(result.user);
+      },
+      (error) => {},
+      () => {
+        this.router.navigateByUrl('/profile');
+      }
+    );
+  }
+
+  logout() {
+    this.localStorageService.clear();
+    this.authStateService.setAuthState(false);
+    this.userStateService.setUserState(null);
+
+    if (this.router.url == '/profile') {
+      this.router.navigateByUrl('/gallery');
     }
   }
 

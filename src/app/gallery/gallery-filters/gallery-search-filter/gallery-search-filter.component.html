@@ -4,7 +4,7 @@
     class="flex w-full py-3 focus:border-red-300 focus-within:border-b-black border-b relative border-opacity-10 items-center border-black"
     ><i class="mr-4 fas fa-search"></i>
     <input
-      [(ngModel)]="search"
+      [ngModel]="search"
       #searchControl="ngModel"
       (input)="updateSearch(searchControl)"
       placeholder="Find by serial..."

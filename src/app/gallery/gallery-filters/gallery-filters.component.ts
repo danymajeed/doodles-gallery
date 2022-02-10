@@ -17,6 +17,9 @@ export class GalleryFiltersComponent implements OnInit {
   @Input()
   disabled: boolean = false;
 
+  @Input()
+  user: any = null;
+
   @Output()
   filtersChangeEvent = new EventEmitter<Filters>();
 
@@ -24,6 +27,13 @@ export class GalleryFiltersComponent implements OnInit {
     if (this.filters.search === value) return;
 
     this.filters.search = value;
+    this.filtersChangeEvent.emit(this.filters);
+  }
+
+  updateType(value: string) {
+    if (this.filters.type === value) return;
+
+    this.filters.type = value;
     this.filtersChangeEvent.emit(this.filters);
   }
 }

@@ -1,0 +1,58 @@
+<ul
+  class="lg:flex lg:flex-col lg:gap-2 grid gap-x-5 mt-7 max-w-md mx-auto"
+  [ngClass]="user ? 'grid-cols-3' : 'grid-cols-2'"
+>
+  <li class="relative">
+    <input
+      class="sr-only peer"
+      type="radio"
+      value="all"
+      name="type"
+      id="type_all"
+      [ngModel]="type"
+      #typeControl="ngModel"
+      (ngModelChange)="updateType($event)"
+    />
+    <label
+      class="uppercase justify-center flex p-2 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-pink-300 peer-checked:ring-2 peer-checked:border-transparent"
+      for="type_all"
+      >All</label
+    >
+  </li>
+
+  <li class="relative" *ngIf="user">
+    <input
+      class="sr-only peer"
+      type="radio"
+      value="my"
+      name="type"
+      id="type_my"
+      [ngModel]="type"
+      #typeControl="ngModel"
+      (ngModelChange)="updateType($event)"
+    />
+    <label
+      class="uppercase justify-center flex p-2 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-pink-300 peer-checked:ring-2 peer-checked:border-transparent"
+      for="type_my"
+      >Mine</label
+    >
+  </li>
+
+  <li class="relative">
+    <input
+      class="sr-only peer"
+      type="radio"
+      value="registered"
+      name="type"
+      id="type_registered"
+      [ngModel]="type"
+      #typeControl="ngModel"
+      (ngModelChange)="updateType($event)"
+    />
+    <label
+      class="uppercase justify-center flex p-2 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-pink-300 peer-checked:ring-2 peer-checked:border-transparent"
+      for="type_registered"
+      >Registered</label
+    >
+  </li>
+</ul>
