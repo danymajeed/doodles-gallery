@@ -17,6 +17,7 @@ import { ConnectComponent } from './connect/connect.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GalleryTypeFilterComponent } from './gallery/gallery-filters/gallery-type-filter/gallery-type-filter.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { GalleryTypeFilterComponent } from './gallery/gallery-filters/gallery-ty
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    InfiniteScrollModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

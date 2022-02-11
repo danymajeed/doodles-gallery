@@ -24,7 +24,7 @@ export class GalleryFiltersComponent implements OnInit {
   filtersChangeEvent = new EventEmitter<Filters>();
 
   updateSearch(value: string) {
-    if (this.filters.search === value) return;
+    if (this.filters.search === value.trim()) return;
 
     this.filters.search = value;
     this.filtersChangeEvent.emit(this.filters);

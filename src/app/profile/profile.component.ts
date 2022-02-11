@@ -21,7 +21,10 @@ export class ProfileComponent implements OnInit {
       this.user = user;
     });
     this.profileForm = this.fb.group({
-      twitter: [this.user ? this.user.twitter : '', Validators.required],
+      twitter: [
+        this.user ? this.user.twitter : '',
+        [Validators.required, Validators.pattern('^@[a-zA-Z0-9_]{3,15}$')],
+      ],
     });
   }
 

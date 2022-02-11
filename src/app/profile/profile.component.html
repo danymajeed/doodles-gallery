@@ -14,7 +14,8 @@
       type="text"
       name="twitter"
       [ngClass]="
-        !twitterControl.value && twitterControl.touched
+        twitterControl.touched &&
+        (!twitterControl.value || twitterControl.invalid)
           ? 'border-red-500'
           : 'border-gray-500 '
       "
@@ -29,7 +30,6 @@
       >Twitter Username</label
     >
   </div>
-
   <div class="text-center">
     <button
       [ngClass]="profileForm.invalid ? 'opacity-50' : ''"
