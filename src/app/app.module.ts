@@ -1,3 +1,4 @@
+import { MoralisService } from './moralis.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,7 +44,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ReactiveFormsModule,
     InfiniteScrollModule,
   ],
-  providers: [],
+  providers: [MoralisService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

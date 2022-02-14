@@ -1,5 +1,8 @@
-import { MetaMaskService } from './../meta-mask.service';
+import { ApiService } from './../api.service';
+import { AuthService } from './../auth.service';
+import { MoralisService } from './../moralis.service';
 import { Component, OnInit } from '@angular/core';
+import { connectors } from './config';
 
 @Component({
   selector: 'app-connect',
@@ -7,13 +10,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./connect.component.scss'],
 })
 export class ConnectComponent implements OnInit {
-  constructor(public metaMaskService: MetaMaskService) {}
+  connectors = connectors;
+
+  constructor(
+    private moralisService: MoralisService,
+    private authService: AuthService,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {}
 
-  connect() {
-    if (this.metaMaskService.isMetaMaskInstalled())
-      this.metaMaskService.connectWithMetaMask();
-    else this.metaMaskService.installMetask();
+  connect(provider: any) {
+    this.moralisService
+      .connect(provider)
+      .then((user: any) => {
+        this.apiService.logIn(user.attributes.authData.moralisEth).subscribe({
+          next: (response) => {
+            this.authService.logIn(response);
+          },
+          error: (error) => {
+            this.moralisService.logOut();
+          },
+          complete: () => {},
+        });
+      })
+      .catch((error: any) => {});
   }
 }

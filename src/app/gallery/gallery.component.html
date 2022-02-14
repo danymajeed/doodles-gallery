@@ -54,6 +54,13 @@
     >
     </app-gallery-list>
     <div
+      *ngIf="!count && !loading && !error"
+      class="uppercase flex justify-center font-bold text-lg"
+    >
+      No Doodles Found
+    </div>
+
+    <div
       @fade
       *ngIf="loading"
       class="col-start-1 mb-4 lg:col-span-3 2xl:col-span-5 col-span-2"

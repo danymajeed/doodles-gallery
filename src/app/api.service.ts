@@ -9,8 +9,12 @@ import { Observable } from 'rxjs';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  login(user: any): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:8000/api/auth/login', user);
+  logIn(authData: any): Observable<any> {
+    return this.http.post<any>('http://127.0.0.1:8000/api/auth/login', {
+      address: authData.id,
+      message: authData.data,
+      signature: authData.signature,
+    });
   }
 
   getDoodles(

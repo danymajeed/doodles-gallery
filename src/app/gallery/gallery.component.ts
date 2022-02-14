@@ -42,6 +42,7 @@ export class GalleryComponent implements OnInit {
   doodles: Array<Doodle> = [];
   filters: Filters = { search: '', type: 'all' };
   loading: boolean = false;
+  error: boolean = false;
   user: any = null;
   isFinished = false;
   currentPage = 0;
@@ -76,6 +77,7 @@ export class GalleryComponent implements OnInit {
     if (this.isFinished) return;
 
     this.loading = true;
+    this.error = false;
     this.currentPage += 1;
     this.apiService
       .getDoodles(
@@ -92,6 +94,7 @@ export class GalleryComponent implements OnInit {
           this.loading = false;
         },
         error: (error) => {
+          this.error = true;
           this.loading = false;
           this.count = 0;
           console.log(error);
