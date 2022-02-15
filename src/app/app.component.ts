@@ -36,7 +36,7 @@ export class AppComponent {
                     this.authService.logIn(response);
                   },
                   error: (error) => {
-                    this.moralis.logout();
+                    this.moralis.logOut();
                   },
                   complete: () => {},
                 });

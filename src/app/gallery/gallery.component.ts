@@ -10,9 +10,11 @@ import {
 } from '@angular/animations';
 
 export interface Doodle {
-  id: number;
+  token_id: number;
   name: string;
+  description: string;
   image: string;
+  user: any;
 }
 
 export interface Filters {
@@ -84,7 +86,7 @@ export class GalleryComponent implements OnInit {
         this.currentPage,
         12,
         this.filters,
-        this.user ? this.user.public_address : ''
+        this.user ? this.user.address : ''
       )
       .subscribe({
         next: (response) => {

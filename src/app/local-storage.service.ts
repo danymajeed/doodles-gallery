@@ -11,9 +11,12 @@ export class LocalStorageService {
 
   constructor() {}
 
-  handleData(token: string, user: any) {
+  handleToken(token: string) {
     localStorage.setItem('auth_token', token);
-    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  handleUser(User: any) {
+    localStorage.setItem('user', JSON.stringify(User));
   }
 
   getToken() {

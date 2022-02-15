@@ -15,7 +15,15 @@
   >
     Doodle
   </p>
-  <h3 class="font-400 pb-2 -mt-1 text-2xs tracking-wider text-center uppercase">
-    No. {{ doodle.id }}
-  </h3></a
+  <h3 class="font-400 -mt-1 text-2xs tracking-wider text-center uppercase">
+    No. {{ doodle.token_id }}
+  </h3>
+</a>
+
+<a
+  target="_blank"
+  href="https://twitter.com/{{ doodle.user.twitter_handle.substring(1) }}"
+  class="cursor-pointer flex justify-center hover:underline text-[#1da1f2]"
+  *ngIf="doodle.user && doodle.user.twitter_handle"
+  >{{ doodle.user.twitter_handle }}</a
 >

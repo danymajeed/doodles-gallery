@@ -16,7 +16,8 @@ export class AuthService {
   ) {}
 
   logIn(data: any) {
-    this.localStorageService.handleData(data.access_token, data.user);
+    this.localStorageService.handleToken(data.access_token);
+    this.localStorageService.handleUser(data.user);
     this.authStateService.setAuthState(true);
     this.userStateService.setUserState(data.user);
 

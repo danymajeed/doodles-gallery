@@ -4,40 +4,70 @@
   }
 </style>
 
-<form
-  [formGroup]="profileForm"
-  (ngSubmit)="submit(profileForm)"
-  class="flex items-center justify-center flex-col h-screen md:mx-32"
->
-  <div class="relative z-0 my-6 w-full group">
-    <input
-      type="text"
-      name="twitter"
-      [ngClass]="
-        twitterControl.touched &&
-        (!twitterControl.value || twitterControl.invalid)
-          ? 'border-red-500'
-          : 'border-gray-500 '
-      "
-      class="block p-2.5 w-full text-xl text-gray-900 bg-transparent rounded-md border-2 appearance-none focus:outline-none focus:ring-0 focus:border-[#1da1f2] peer"
-      placeholder=" "
-      formControlName="twitter"
-    />
-    <label
-      [ngClass]="twitterControl.value ? 'z-10' : '-z-10'"
-      for="twitter"
-      class="uppercase bg-white tracking-widest absolute mx-2.5 text-xl text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 peer-focus:px-2.5 peer-focus:mx-1 origin-[0] peer-focus:z-10 peer-focus:left-0 peer-focus:text-[#1da1f2] peer-focus:dark:text-[#1da1f2] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-      >Twitter Username</label
-    >
+<div class="flex flex-col pt-32 lg:px-20">
+  <div
+    class="block relative z-10 items-end justify-between h-14 pb-6 border-b border-opacity-10 border-black"
+  >
+    <h1 class="text-4xl uppercase font-extrabold tracking-tight">
+      <span class="">MY DOODLES</span>
+    </h1>
   </div>
-  <div class="text-center">
-    <button
-      [ngClass]="profileForm.invalid ? 'opacity-50' : ''"
-      type="submit"
-      [disabled]="profileForm.invalid"
-      class="py-2.5 px-5 text-white rounded-md uppercase bg-[#1da1f2]"
-    >
-      Save
-    </button>
+  <app-gallery-list
+    [doodles]="doodles"
+    class="mt-6 grid lg:grid-cols-6 2xl:grid-cols-8 md:grid-cols-5 grid-cols-2 lg:gap-x-6 gap-x-4 lg:gap-y-2 gap-y-1 lg:col-span-3"
+  ></app-gallery-list>
+  <div
+    *ngIf="!doodles.length && !doodlesLoading && !doodlesError"
+    class="uppercase flex justify-center font-bold text-lg"
+  >
+    No Doodles Found
   </div>
-</form>
+  <div
+    class="block relative z-10 pb-5 border-b border-opacity-10 border-black"
+  ></div>
+  <form
+    [formGroup]="profileForm"
+    (ngSubmit)="submit(profileForm)"
+    class="flex items-center justify-center gap-3 pt-5 md:mx-32"
+  >
+    <div class="relative z-0 my-6 w-full group">
+      <input
+        type="text"
+        name="twitter"
+        [ngClass]="
+          twitterControl.touched &&
+          (!twitterControl.value || twitterControl.invalid)
+            ? 'border-red-500'
+            : 'border-gray-500 '
+        "
+        class="block p-2.5 w-full text-xl text-gray-900 bg-transparent rounded-md border-2 appearance-none focus:outline-none focus:ring-0 focus:border-[#1da1f2] peer"
+        placeholder=" "
+        formControlName="twitter"
+      />
+      <label
+        [ngClass]="twitterControl.value ? 'z-10' : '-z-10'"
+        for="twitter"
+        class="uppercase whitespace-nowrap bg-white tracking-widest absolute mx-2.5 text-xl text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 peer-focus:px-2.5 peer-focus:mx-1 origin-[0] peer-focus:z-10 peer-focus:left-0 peer-focus:text-[#1da1f2] peer-focus:dark:text-[#1da1f2] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+        >Twitter Handle</label
+      >
+      <div
+        class="absolute text-red-400 h-0 uppercase font-bold flex items-center mt-5 tracking-wider"
+        *ngIf="twitterControl.touched && twitterControl.invalid"
+      >
+        <i class="fas fa-times mr-1"></i>
+        <div *ngIf="twitterControl.errors['required']">Required</div>
+        <div *ngIf="twitterControl.errors['pattern']">@username</div>
+      </div>
+    </div>
+    <div class="text-center">
+      <button
+        [disabled]="profileForm.invalid || updateUserLoading"
+        [ngClass]="profileForm.invalid || updateUserLoading ? 'opacity-50' : ''"
+        type="submit"
+        class="text-xl py-2.5 px-5 text-white rounded-md uppercase bg-[#1da1f2]"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>
