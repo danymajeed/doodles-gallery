@@ -1,3 +1,4 @@
+import { HttpCancelService } from './../http-cancel.service';
 import { ApiService } from './../api.service';
 import { UserStateService } from '../user-state.service';
 import { Component, OnInit } from '@angular/core';
@@ -52,7 +53,8 @@ export class GalleryComponent implements OnInit {
 
   constructor(
     private userStateService: UserStateService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private httpCancelService: HttpCancelService
   ) {}
 
   ngOnInit(): void {
@@ -78,30 +80,23 @@ export class GalleryComponent implements OnInit {
   getDoodles() {
     if (this.isFinished) return;
 
+    this.httpCancelService.cancelPendingRequests();
     this.loading = true;
     this.error = false;
     this.currentPage += 1;
-    this.apiService
-      .getDoodles(
-        this.currentPage,
-        12,
-        this.filters,
-        this.user ? this.user.address : ''
-      )
-      .subscribe({
-        next: (response) => {
-          if (!response.doodles.length) this.isFinished = true;
-          else this.doodles = this.doodles.concat(response.doodles);
-          this.count = response.count;
-          this.loading = false;
-        },
-        error: (error) => {
-          this.error = true;
-          this.loading = false;
-          this.count = 0;
-          console.log(error);
-        },
-        complete: () => {},
-      });
+    this.apiService.getDoodles(this.currentPage, 12, this.filters).subscribe({
+      next: (response) => {
+        if (!response.doodles.length) this.isFinished = true;
+        else this.doodles = this.doodles.concat(response.doodles);
+        this.count = response.count;
+        this.loading = false;
+      },
+      error: (error) => {
+        this.error = true;
+        this.loading = false;
+        this.count = 0;
+      },
+      complete: () => {},
+    });
   }
 }

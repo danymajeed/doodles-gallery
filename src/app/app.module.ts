@@ -1,3 +1,5 @@
+import { HttpCancelService } from './http-cancel.service';
+import { HttpCancelInterceptor } from './http-cancel.interceptor';
 import { MoralisService } from './moralis.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,7 +18,7 @@ import { GallerySearchFilterComponent } from './gallery/gallery-filters/gallery-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConnectComponent } from './connect/connect.component';
 import { ProfileComponent } from './profile/profile.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GalleryTypeFilterComponent } from './gallery/gallery-filters/gallery-type-filter/gallery-type-filter.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
@@ -44,7 +46,15 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ReactiveFormsModule,
     InfiniteScrollModule,
   ],
-  providers: [MoralisService],
+  providers: [
+    MoralisService,
+    HttpCancelService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpCancelInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

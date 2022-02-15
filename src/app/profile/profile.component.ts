@@ -47,11 +47,9 @@ export class ProfileComponent implements OnInit {
     this.apiService.getUserDoodles().subscribe({
       next: (response) => {
         this.doodles = response.doodles;
-        console.log(response);
       },
       error: (error) => {
         this.doodlesError = true;
-        console.log(error);
       },
       complete: () => {
         this.doodlesLoading = false;

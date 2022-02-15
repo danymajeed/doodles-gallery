@@ -43,20 +43,18 @@ export class ApiService {
     });
   }
 
-  getDoodles(
-    page: number,
-    limit: number,
-    filers: Filters,
-    address: string = ''
-  ): Observable<any> {
+  getDoodles(page: number, limit: number, filers: Filters): Observable<any> {
     let params = new HttpParams();
     params = params.append('page', page);
     params = params.append('limit', limit);
-    params = params.append('address', address);
     params = params.append('search', filers.search);
     params = params.append('type', filers.type);
 
-    const options = page ? { params: params } : {};
+    const options = {
+      params: params,
+      headers: this.setHeaders(),
+    };
+
     return this.http.get<any>('http://127.0.0.1:8000/api/doodles', options);
   }
 }
