@@ -16,19 +16,33 @@
     [doodles]="doodles"
     class="mt-6 grid lg:grid-cols-6 2xl:grid-cols-8 md:grid-cols-5 grid-cols-2 lg:gap-x-6 gap-x-4 lg:gap-y-2 gap-y-1 lg:col-span-3"
   ></app-gallery-list>
-  <div
-    *ngIf="!doodles.length && !doodlesLoading && !doodlesError"
-    class="uppercase flex justify-center font-bold text-lg"
-  >
-    No Doodles Found
+  <div class="uppercase flex justify-center items-center font-bold text-lg">
+    <div *ngIf="!doodles.length && !doodlesLoading && !doodlesError">
+      <i class="fas fa-search mr-3"></i>
+      No Doodles Found
+    </div>
+    <div *ngIf="!doodlesLoading && doodlesError">
+      <i class="fas fa-search mr-3"></i>
+      Failed to load doodles
+    </div>
   </div>
+
+  <div *ngIf="doodlesLoading" class="mb-8">
+    <button
+      class="w-full tracking-widest bg-black text-white py-4 uppercase font-mono disabled:cursor-not-allowed text-2xs mt-8"
+    >
+      Loading
+    </button>
+  </div>
+
   <div
     class="block relative z-10 pb-5 border-b border-opacity-10 border-black"
   ></div>
+
   <form
     [formGroup]="profileForm"
     (ngSubmit)="submit(profileForm)"
-    class="flex items-center justify-center gap-3 pt-5 md:mx-32"
+    class="flex flex-col items-center justify-center gap-3 pt-5 md:mx-32"
   >
     <div class="relative z-0 my-6 w-full group">
       <input
@@ -42,7 +56,7 @@
         "
         class="block p-2.5 w-full text-xl text-gray-900 bg-transparent rounded-md border-2 appearance-none focus:outline-none focus:ring-0 focus:border-[#1da1f2] peer"
         placeholder=" "
-        formControlName="twitter"
+        formControlName="twitter_handle"
       />
       <label
         [ngClass]="twitterControl.value ? 'z-10' : '-z-10'"
@@ -57,10 +71,14 @@
         <i class="fas fa-times mr-1"></i>
         <div *ngIf="twitterControl.errors['required']">Required</div>
         <div *ngIf="twitterControl.errors['pattern']">@username</div>
+        <div *ngIf="twitterControl.errors['exists']">
+          Username already exists
+        </div>
       </div>
     </div>
-    <div class="text-center">
+    <div>
       <button
+        *ngIf="!updateUserLoading; else userUpdateSpinner"
         [disabled]="profileForm.invalid || updateUserLoading"
         [ngClass]="profileForm.invalid || updateUserLoading ? 'opacity-50' : ''"
         type="submit"
@@ -68,6 +86,10 @@
       >
         Save
       </button>
+
+      <ng-template #userUpdateSpinner>
+        <app-spinner [width]="30" [height]="30"></app-spinner
+      ></ng-template>
     </div>
   </form>
 </div>

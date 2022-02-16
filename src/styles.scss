@@ -10,6 +10,8 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/v4-shims";
 
+@import "~ngx-toastr/toastr";
+
 router-outlet ~ * {
   position: absolute;
   padding: 0 20px;
@@ -20,3 +22,24 @@ router-outlet ~ * {
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap");
+
+.toast-error {
+  text-transform: uppercase;
+  background-color: #f83527;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 6px;
+  padding: 15px 15px 15px 50px;
+  width: 350px;
+  background-position: 15px center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  box-shadow: 0 0 12px #999999;
+  color: #ffffff;
+
+  .toast-title {
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+  }
+}

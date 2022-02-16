@@ -4,74 +4,80 @@
   }
 </style>
 
-<div class="lg:grid lg:grid-cols-4 w-full flex flex-col">
-  <div class="lg:col-span-1 lg:block lg:sticky lg:top-0 lg:h-screen pt-32">
-    <app-gallery-filters
-      [user]="user"
-      [disabled]="loading"
-      [filters]="filters"
-      (filtersChangeEvent)="refreshDoodles($event)"
-    ></app-gallery-filters>
-  </div>
-  <div class="lg:col-span-3 lg:px-8 w-full lg:pt-32">
-    <div
-      class="top-0 items-center pt-24 lg:bg-transparent left-0 px-5 lg:pt-0 duration-300 lg:px-0 fixed w-full lg:relative z-20 flex justify-between h-14 lg:pb-4 pb-6 border-b border-opacity-10 border-black bg-white"
-    >
-      <h1 class="lg:text-4xl text-lg uppercase font-extrabold tracking-tight">
-        <span>Doodles</span>
-        <span @fadeIn *ngIf="count">{{ " // " + count }}</span>
-      </h1>
-
-      <div class="flex items-center pb-0">
-        <a
-          *ngIf="user == null"
-          routerLink="/connect"
-          type="button"
-          class="flex hover:opacity-60 duration-300 lg:py-2 lg:px-4 lg:rounded lg:bg-gray-200"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-            class="w-5 h-5"
-          >
-            <path
-              d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"
-            ></path>
-          </svg>
-          <span
-            class="block uppercase tracking-wide text-xs font-mono pt-0.5 pl-2"
-            >Connect To MetaMask</span
-          >
-        </a>
-      </div>
+<div>
+  <div class="lg:grid lg:grid-cols-4 w-full flex flex-col">
+    <div class="lg:col-span-1 lg:block lg:sticky lg:top-0 lg:h-screen pt-32">
+      <app-gallery-filters
+        [user]="user"
+        [disabled]="loading"
+        [filters]="filters"
+        (filtersChangeEvent)="refreshDoodles($event)"
+      ></app-gallery-filters>
     </div>
-
-    <app-gallery-list
-      [doodles]="doodles"
-      class="mt-10 grid lg:grid-cols-4 2xl:grid-cols-5 grid-cols-2 lg:gap-x-6 gap-x-4 lg:gap-y-2 gap-y-1 lg:col-span-3"
-    >
-    </app-gallery-list>
-    <div
-      *ngIf="!count && !loading && !error"
-      class="uppercase flex justify-center font-bold text-lg"
-    >
-      No Doodles Found
-    </div>
-
-    <div
-      @fade
-      *ngIf="loading"
-      class="col-start-1 mb-4 lg:col-span-3 2xl:col-span-5 col-span-2"
-    >
-      <button
-        class="w-full tracking-widest bg-black text-white py-4 uppercase font-mono disabled:cursor-not-allowed text-2xs mt-8"
+    <div class="lg:col-span-3 lg:px-8 w-full lg:pt-32">
+      <div
+        class="top-0 items-center pt-24 lg:bg-transparent left-0 px-5 lg:pt-0 duration-300 lg:px-0 fixed w-full lg:relative z-20 flex justify-between h-14 lg:pb-4 pb-6 border-b border-opacity-10 border-black bg-white"
       >
-        Loading
-      </button>
-    </div>
+        <h1 class="lg:text-4xl text-lg uppercase font-extrabold tracking-tight">
+          <span>Doodles</span>
+          <span @fadeIn *ngIf="count">{{ " (" + count + ")" }}</span>
+        </h1>
 
-    <div infiniteScroll (scrolled)="onScroll()"></div>
+        <div class="flex items-center pb-0">
+          <a
+            *ngIf="user == null"
+            routerLink="/connect"
+            type="button"
+            class="flex hover:opacity-60 duration-300 lg:py-2 lg:px-4 lg:rounded lg:bg-gray-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              class="w-5 h-5"
+            >
+              <path
+                d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"
+              ></path>
+            </svg>
+            <span
+              class="block uppercase tracking-wide text-xs font-mono pt-0.5 pl-2"
+              >Connect Wallet</span
+            >
+          </a>
+        </div>
+      </div>
+
+      <app-gallery-list
+        [doodles]="doodles"
+        class="mt-10 grid lg:grid-cols-4 2xl:grid-cols-5 grid-cols-2 lg:gap-x-6 gap-x-4 lg:gap-y-2 gap-y-1 lg:col-span-3"
+      >
+      </app-gallery-list>
+      <div class="uppercase flex justify-center items-center font-bold text-lg">
+        <div *ngIf="!count && !loading && !error">
+          <i class="fas fa-search mr-3"></i>
+          No Doodles Found
+        </div>
+        <div *ngIf="!loading && error">
+          <i class="fas fa-search mr-3"></i>
+          Failed to load doodles
+        </div>
+      </div>
+
+      <div
+        @fade
+        *ngIf="loading"
+        class="col-start-1 mb-4 lg:col-span-3 2xl:col-span-5 col-span-2"
+      >
+        <button
+          class="w-full tracking-widest bg-black text-white py-4 uppercase font-mono disabled:cursor-not-allowed text-2xs mt-8"
+        >
+          Loading
+        </button>
+      </div>
+
+      <div infiniteScroll (scrolled)="onScroll()"></div>
+    </div>
   </div>
 </div>

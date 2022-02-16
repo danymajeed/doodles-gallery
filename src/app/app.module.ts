@@ -21,6 +21,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { GalleryTypeFilterComponent } from './gallery/gallery-filters/gallery-type-filter/gallery-type-filter.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ConnectComponent,
     ProfileComponent,
     GalleryTypeFilterComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,12 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     HttpClientModule,
     ReactiveFormsModule,
     InfiniteScrollModule,
+    ToastrModule.forRoot({
+      maxOpened: 1,
+      autoDismiss: true,
+      timeOut: 3000,
+      easeTime: 200,
+    }),
   ],
   providers: [
     MoralisService,

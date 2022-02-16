@@ -4,18 +4,22 @@
   }
 </style>
 
-<!-- <div class="h-screen flex flex-col items-center justify-center">
-  <button
-    (click)="connect()"
-    class="lg:hover:scale-105 lg:hover:shadow-2xl lg:w-3/4 shadow-xl w-full xl:max-w-2xl lg:max-w-lg flex items-center justify-center text-lg uppercase h-20 duration-300 cursor-pointer font-600 transform border py-5 rounded-md border-none text-gray-800 hover:text-black bg-white"
-  >
-    Connect To Wallet
-  </button>
-</div> -->
+<div
+  *ngIf="loading"
+  class="left-0 top-0 w-full h-full fixed bg-black opacity-50 z-50"
+>
+  <div class="left-0 top-0 w-full h-full absolute">
+    <div
+      class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+    >
+      <app-spinner></app-spinner>
+    </div>
+  </div>
+</div>
 
-<div class="h-screen flex flex-col items-center justify-center">
+<div class="h-screen flex flex-col items-center justify-center gap-4">
   <div
-    class="grid grid-cols-2 lg:gap-x-6 gap-x-6 gap-y-7 shadow-xl border p-10 rounded-md"
+    class="grid grid-cols-2 lg:gap-x-8 gap-x-6 gap-y-7 shadow-xl border p-10 rounded-md"
   >
     <div *ngFor="let connector of connectors">
       <div

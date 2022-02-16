@@ -3,6 +3,7 @@ import { AuthService } from './../auth.service';
 import { MoralisService } from './../moralis.service';
 import { Component, OnInit } from '@angular/core';
 import { connectors } from './config';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-connect',
@@ -11,16 +12,20 @@ import { connectors } from './config';
 })
 export class ConnectComponent implements OnInit {
   connectors = connectors;
+  loading: boolean = false;
+  error: boolean = false;
 
   constructor(
     private moralisService: MoralisService,
     private authService: AuthService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {}
 
   connect(provider: any) {
+    this.loading = true;
     this.moralisService
       .connect(provider)
       .then((user: any) => {
@@ -29,11 +34,20 @@ export class ConnectComponent implements OnInit {
             this.authService.logIn(response);
           },
           error: (error) => {
-            this.moralisService.logOut();
+            this.moralisService.logOut().then(() => {
+              this.toastr.error('', 'Failed To Connect Wallet', {
+                toastClass: 'toast-error',
+              });
+            });
+            this.loading = false;
           },
-          complete: () => {},
+          complete: () => {
+            this.loading = false;
+          },
         });
       })
-      .catch((error: any) => {});
+      .catch((error: any) => {
+        this.loading = false;
+      });
   }
 }
