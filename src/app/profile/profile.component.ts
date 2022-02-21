@@ -52,6 +52,7 @@ export class ProfileComponent implements OnInit {
       },
       error: (error) => {
         this.doodlesError = true;
+        this.doodlesLoading = false;
       },
       complete: () => {
         this.doodlesLoading = false;

@@ -43,3 +43,14 @@ router-outlet ~ * {
     letter-spacing: 0.1rem;
   }
 }
+
+.web3modal-modal-lightbox {
+  z-index: 100 !important;
+  .web3modal-provider-name {
+    font-size: 1.1rem;
+  }
+  .web3modal-provider-description {
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+  }
+}

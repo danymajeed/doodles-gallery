@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { LocalStorageService } from './local-storage.service';
 import { Filters } from './gallery/gallery.component';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -8,6 +9,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
+  apiUrl = environment.apiUrl;
+
   constructor(
     private http: HttpClient,
     private localStorageService: LocalStorageService
@@ -24,21 +27,17 @@ export class ApiService {
   }
 
   logIn(authData: any): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:8000/api/auth/login', {
-      address: authData.id,
-      message: authData.data,
-      signature: authData.signature,
-    });
+    return this.http.post<any>(`${this.apiUrl}/auth/login`, authData);
   }
 
   updateUser(id: any, data: any): Observable<any> {
-    return this.http.put<any>(`http://127.0.0.1:8000/api/user/${id}`, data, {
+    return this.http.put<any>(`${this.apiUrl}/user/${id}`, data, {
       headers: this.setHeaders(),
     });
   }
 
   getUserDoodles(): Observable<any> {
-    return this.http.get<any>('http://127.0.0.1:8000/api/doodles/user', {
+    return this.http.get<any>(`${this.apiUrl}/doodles/user`, {
       headers: this.setHeaders(),
     });
   }
@@ -55,6 +54,6 @@ export class ApiService {
       headers: this.setHeaders(),
     };
 
-    return this.http.get<any>('http://127.0.0.1:8000/api/doodles', options);
+    return this.http.get<any>(`${this.apiUrl}/doodles`, options);
   }
 }

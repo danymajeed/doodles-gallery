@@ -1,3 +1,5 @@
+import { Web3Service } from './web3.service';
+import { environment } from './../environments/environment';
 import { HttpCancelService } from './http-cancel.service';
 import { HttpCancelInterceptor } from './http-cancel.interceptor';
 import { MoralisService } from './moralis.service';
@@ -23,6 +25,7 @@ import { GalleryTypeFilterComponent } from './gallery/gallery-filters/gallery-ty
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { ToastrModule } from 'ngx-toastr';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 @NgModule({
   declarations: [
@@ -54,8 +57,14 @@ import { ToastrModule } from 'ngx-toastr';
       timeOut: 3000,
       easeTime: 200,
     }),
+    LoggerModule.forRoot({
+      serverLoggingUrl: `${environment.apiUrl}/logs`,
+      level: NgxLoggerLevel.DEBUG,
+      serverLogLevel: NgxLoggerLevel.ERROR,
+    }),
   ],
   providers: [
+    Web3Service,
     MoralisService,
     HttpCancelService,
     {

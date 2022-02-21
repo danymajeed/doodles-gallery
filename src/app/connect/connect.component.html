@@ -17,24 +17,11 @@
   </div>
 </div>
 
-<div class="h-screen flex flex-col items-center justify-center gap-4">
-  <div
-    class="grid grid-cols-2 lg:gap-x-8 gap-x-6 gap-y-7 shadow-xl border p-10 rounded-md"
+<div class="h-screen flex flex-col items-center justify-center">
+  <button
+    (click)="connect()"
+    class="lg:hover:scale-105 lg:hover:shadow-2xl lg:w-3/4 shadow-xl w-full xl:max-w-2xl lg:max-w-lg flex items-center justify-center text-lg uppercase h-20 duration-300 cursor-pointer font-600 transform border py-5 rounded-md border-none text-gray-800 hover:text-black bg-white"
   >
-    <div *ngFor="let connector of connectors">
-      <div
-        class="flex items-center justify-center flex-col cursor-pointer"
-        (click)="connect(connector.connectorId)"
-      >
-        <img
-          src="./assets/images/{{ connector.icon }}"
-          alt="{{ connector.title }}"
-          class="w-10 h-10 rounded-full"
-        />
-        <div class="ml-2 mt-2">
-          <div class="font-bold">{{ connector.title }}</div>
-        </div>
-      </div>
-    </div>
-  </div>
+    Connect To Wallet
+  </button>
 </div>
